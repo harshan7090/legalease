@@ -178,7 +178,7 @@ def render_risk_block(conf, last_msg=""):
         "MEDIUM": ("#ffa726", "#ffa72618", "MODERATE RISK"),
         "HIGH":   ("#f44336", "#f4433618", "HIGH RISK"),
     }
-    lvl = risk_level(conf)
+    lvl = risk_level(conf, last_msg)  # content-based risk scoring
     col_hex, col_bg, lvl_label = level_map[lvl]
     flags = detect_risk_keywords(last_msg)
     complexity = complexity_index(conf)
@@ -320,7 +320,10 @@ with tab_chat:
         history = get_history()
         last_ai = next((m["content"] for m in reversed(history) if m["role"] == "assistant"), "")
         neon_divider()
-        render_risk_block(last_conf, last_ai)
+        # Use last user message (clause) for content-based risk scoring
+        user_turns = [m["content"] for m in get_history() if m["role"] == "user"]
+        last_clause = user_turns[-1] if user_turns else last_ai
+        render_risk_block(last_conf, last_clause)
         neon_divider()
 
     # Export buttons (only if there's chat history)
@@ -451,7 +454,7 @@ with tab_pdf:
                     st.markdown("#### 🤖 Analysis Result")
                     st.markdown(response_text)
                     neon_divider()
-                    render_risk_block(confidence, response_text)
+                    render_risk_block(confidence, user_input)  # user clause drives risk level
 
                     # Send to chat memory too
                     add_turn("user", f"[PDF: {uploaded_pdf.name} — {pdf_template}]\n{selected_chunk[:500]}…")
@@ -541,7 +544,7 @@ with tab_compare:
                 st.markdown("#### 📊 Comparison Result")
                 st.markdown(response_text)
                 neon_divider()
-                render_risk_block(confidence, response_text)
+                render_risk_block(confidence, user_input)  # user clause drives risk level
 
                 # Show quick word-diff stats
                 words_a = set(clause_a.lower().split())

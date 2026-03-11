@@ -282,6 +282,3 @@ The dev container installs all dependencies automatically.
 ## 📜 License
 
 MIT License — see [LICENSE](LICENSE) file.
-#   l e g a l e a s e 
- 
- 
