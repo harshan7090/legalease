@@ -45,10 +45,18 @@ load_dotenv()
 # MODEL_NAME    — which Groq-hosted model to use (see .env.example for options)
 # TEMPERATURE   — controls randomness; 0.3 gives focused legal analysis
 # MAX_TOKENS    — cap on generated tokens to prevent runaway costs / latency
-GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
-MODEL_NAME:   str = os.getenv("MODEL_NAME", "llama-3.3-70b-versatile")
-TEMPERATURE:  float = float(os.getenv("TEMPERATURE", "0.3"))
-MAX_TOKENS:   int   = int(os.getenv("MAX_TOKENS", "1024"))
+def _get_secret(key: str, default: str = "") -> str:
+    """Read from st.secrets (Streamlit Cloud) first, then os.environ (.env), then default."""
+    try:
+        import streamlit as st
+        return st.secrets.get(key, os.getenv(key, default))
+    except Exception:
+        return os.getenv(key, default)
+
+GROQ_API_KEY: str = _get_secret("GROQ_API_KEY", "")
+MODEL_NAME:   str = _get_secret("MODEL_NAME", "llama-3.3-70b-versatile")
+TEMPERATURE:  float = float(_get_secret("TEMPERATURE", "0.3"))
+MAX_TOKENS:   int   = int(_get_secret("MAX_TOKENS", "1024"))
 
 # ── Groq client instance ──────────────────────────────────────────────────────
 # The Groq SDK client is stateless and thread-safe; one instance is fine.

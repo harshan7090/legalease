@@ -34,3 +34,4 @@ demo_outputs/*.txt
 
 # ── Streamlit cache ──────────────────────────────────────────────────────────
 .streamlit/
+.streamlit/secrets.toml
