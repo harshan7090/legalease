@@ -1,0 +1,42 @@
+{
+  // VS Code Dev Container configuration.
+  // Open this project in VS Code → "Reopen in Container" to get a
+  // fully configured Python environment automatically.
+  "name": "LegalEase Dev Container",
+
+  // Use the official Microsoft Python 3.11 dev container image.
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+
+  // Install Python dependencies when the container is built.
+  "postCreateCommand": "pip install -r requirements.txt",
+
+  // Port forwarding: expose Streamlit's port to the host.
+  "forwardPorts": [8501],
+
+  // VS Code extensions to install automatically inside the container.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",           // Python language support
+        "ms-python.vscode-pylance",   // Type checking and IntelliSense
+        "ms-python.black-formatter",  // Auto-formatting
+        "ms-toolsai.jupyter",         // Jupyter notebooks (optional)
+        "streetsidesoftware.code-spell-checker"  // Spell check for docs
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "editor.formatOnSave": true,
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.black-formatter"
+        }
+      }
+    }
+  },
+
+  // Environment variables available inside the container.
+  // The actual GROQ_API_KEY value comes from your .env file or
+  // VS Code's secrets manager — do NOT hardcode it here.
+  "remoteEnv": {
+    "GROQ_API_KEY": "${localEnv:GROQ_API_KEY}"
+  }
+}

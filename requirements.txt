@@ -1,0 +1,21 @@
+# ── Web UI ─────────────────────────────────────────────────────────────────
+streamlit>=1.35.0
+
+# ── LLM Backend ────────────────────────────────────────────────────────────
+groq>=0.9.0
+
+# ── Environment / Config ───────────────────────────────────────────────────
+python-dotenv>=1.0.0
+
+# ── PDF Generation ─────────────────────────────────────────────────────────
+fpdf2>=2.7.9
+
+# ── PDF Reading (upload feature) ───────────────────────────────────────────
+PyMuPDF>=1.23.0        # fitz — fast PDF text extraction, no binary deps
+
+# ── Text Readability ───────────────────────────────────────────────────────
+textstat>=0.7.3
+
+# ── Data / Charts ──────────────────────────────────────────────────────────
+plotly>=5.18.0         # interactive risk chart
+pandas>=2.0.0          # clause history table

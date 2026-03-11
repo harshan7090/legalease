@@ -1,0 +1,123 @@
+/*
+ * static/style.css
+ * ─────────────────
+ * Custom CSS injected into the Streamlit app via st.markdown(unsafe_allow_html=True).
+ *
+ * Color palette:
+ *   Slate      #1c1c2e  — primary dark background / headings
+ *   Parchment  #f5f0e8  — warm off-white for content areas
+ *   Red        #c62828  — high risk
+ *   Green      #2e7d32  — low risk / accents
+ *   Orange     #f57c00  — medium risk
+ *   Muted      #888888  — captions, secondary text
+ *
+ * Loaded by app.py using:
+ *   with open("static/style.css") as f:
+ *       st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+ */
+
+/* ── Typography ─────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+html, body, [class*="css"] {
+    font-family: 'Source Sans 3', sans-serif;
+}
+
+/* App title */
+h1 {
+    font-family: 'Playfair Display', serif !important;
+    color: #1c1c2e !important;
+    letter-spacing: -0.5px;
+}
+
+h2, h3 {
+    font-family: 'Playfair Display', serif !important;
+    color: #1c1c2e !important;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────────────────── */
+section[data-testid="stSidebar"] {
+    background-color: #1c1c2e !important;
+}
+
+section[data-testid="stSidebar"] * {
+    color: #f5f0e8 !important;
+}
+
+section[data-testid="stSidebar"] .stRadio label {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+section[data-testid="stSidebar"] hr {
+    border-color: #3a3a5c !important;
+}
+
+/* ── Chat messages ────────────────────────────────────────────────────────── */
+[data-testid="stChatMessage"] {
+    border-radius: 12px;
+    padding: 4px 8px;
+    margin-bottom: 4px;
+}
+
+/* User messages — parchment tint */
+[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) {
+    background-color: #f5f0e8;
+}
+
+/* Assistant messages — white */
+[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-assistant"]) {
+    background-color: #ffffff;
+    border: 1px solid #e8e8e8;
+}
+
+/* ── Input box ────────────────────────────────────────────────────────────── */
+[data-testid="stChatInput"] textarea {
+    border: 2px solid #1c1c2e !important;
+    border-radius: 10px !important;
+    font-family: 'Source Sans 3', sans-serif;
+}
+
+[data-testid="stChatInput"] textarea:focus {
+    border-color: #2e7d32 !important;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15) !important;
+}
+
+/* ── Download buttons ─────────────────────────────────────────────────────── */
+.stDownloadButton button {
+    background-color: #1c1c2e !important;
+    color: #f5f0e8 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.stDownloadButton button:hover {
+    background-color: #2e7d32 !important;
+}
+
+/* ── Clear button ─────────────────────────────────────────────────────────── */
+button[kind="secondary"] {
+    border-color: #c62828 !important;
+    color: #c62828 !important;
+}
+
+/* ── Metric tiles ─────────────────────────────────────────────────────────── */
+[data-testid="stMetric"] {
+    background: #f5f0e8;
+    border-radius: 10px;
+    padding: 12px 16px;
+    border-left: 4px solid #2e7d32;
+}
+
+/* ── Caption / disclaimer text ────────────────────────────────────────────── */
+.disclaimer-box {
+    background: #fff8e1;
+    border-left: 4px solid #f57c00;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #5d4037;
+    margin-bottom: 12px;
+}

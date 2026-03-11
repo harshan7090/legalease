@@ -1,0 +1,13 @@
+# demo_outputs/
+
+This directory is created at runtime by `run_demo.py`.
+
+Files written here:
+- `explain_output.txt`   — output from the Explain template
+- `summarize_output.txt` — output from the Summarize template
+- `questions_output.txt` — output from Generate Questions template
+- `debug_output.txt`     — output from the Debug template
+- `demo_report.pdf`      — full PDF brief of all 4 template outputs
+- `demo_notes.md`        — Markdown notes of all 4 template outputs
+
+Run `python run_demo.py` from the project root to generate these files.
